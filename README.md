@@ -1,4 +1,4 @@
-# nginx-swag
+# ngx-swag
 Converts Swagger to NGINX configurations
 
 ## Overview

@@ -30,13 +30,13 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version=find_version('VERSION'),
+    version=find_version('ngx-swag','__init__.py'),
 
     description='A sample Python project',
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/dejonghe/nginx-swag',
+    url='https://github.com/dejonghe/ngx-swag',
 
     # Author details
     author='Derek DeJonghe',
@@ -115,7 +115,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'nginx-swag=nginx-swag:main',
+            'ngx-swag=ngx-swag:main',
         ],
     },
 )

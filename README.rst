@@ -1,4 +1,4 @@
-Converts swagger docs to NGINX Configs
+Converts Swagger docs to NGINX Configs
 =======================
 
 This project converts swagger documentation to NGINX configuration files.
