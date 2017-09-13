@@ -34,13 +34,13 @@ def find_version(*file_paths):
     raise RuntimeError("Unable to find version string.")
 
 setup(
-    name='nginx-swag',
+    name='ngx_swag',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    #version=find_version('ngx-swag/__init__.py'),
-    version='0.0.1',
+    version=find_version('ngx_swag', '__init__.py'),
+    #version='0.0.1',
 
     description='A sample Python project',
     long_description=long_description,
@@ -96,7 +96,11 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['ruamel.yaml==0.14.12'],
+    install_requires=[
+        'ruamel.yaml==0.14.12',
+		'parse==1.8.2',
+        'jinja2==2.8'
+    ],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
@@ -110,9 +114,9 @@ setup(
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
-    #package_data={
-    #    'sample': ['package_data.dat'],
-    #},
+    package_data={
+        'ngx_swag': ['templates/server.jinja'],
+    },
 
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:
