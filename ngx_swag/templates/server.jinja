@@ -1,4 +1,4 @@
-{% for k,v in info.items() %}
+{% for k,v in swag.info.items() %}
 # {{ k }}: {{ v }}
 {% endfor %}
 
@@ -6,23 +6,29 @@ server {
     listen 80 default_server;
     server_name _;
 
-    {% for path, path_info in paths.items() %}
-    location {{ path }} {
-      {% for method, specs in path_info.items() %}
-        {% for param in specs['parameters'] %}
-          {% if param['required'] %}
-            if ($args !~ "{{ param['name'] }}=(.+)") {
-                return 400 "{{ param['name'] }} parameter required";
-            }
-          {% endif %}
-        {% endfor %}
-        {% if path_info['x-amazon-apigateway-any-method'] is defined %}       
-        {% if path_info['x-amazon-apigateway-any-method']['x-amazon-apigateway-integration'] is defined %}       
-        set $aws_function {{ path_info['x-amazon-apigateway-any-method']['x-amazon-apigateway-integration']['function'] }};
-        {% endif %}
-        {% endif %}
-        content_by_lua_file conf/conf.d/lambda_invoker.lua;
-      {% endfor %}
-    }
+    {% if swag['basePath'] -%}
+    location {{ swag.basePath }}
+    {% endif -%}
+      {% for path in swag['paths'] -%}
+      location {{ path.path }} {
+        {% for method in path['methods'] -%}
+          {% for param in method['parameters'] -%}
+            {% if param['required'] -%}
+              if ($args !~ "{{ param['name'] }}=(.+)") {
+                  return 400 "{{ param['name'] }} parameter required";
+              }
+            {%- endif %}
+          {%- endfor %}
+          {% if method['x-amazon-apigateway-any-method'] is defined -%}       
+          {% if method['x-amazon-apigateway-any-method']['x-amazon-apigateway-integration'] is defined -%}       
+          set $aws_function {{ method['x-amazon-apigateway-any-method']['x-amazon-apigateway-integration']['function'] }};
+          content_by_lua_file conf/conf.d/lambda_invoker.lua;
+          {%- endif %}
+          {%- endif %}
+        {%- endfor %}
+      }
     {% endfor %}
+    {% if swag['basePath'] -%}
+    }
+    {% endif -%}
 }

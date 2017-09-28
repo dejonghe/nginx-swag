@@ -97,7 +97,7 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
-        'ruamel.yaml==0.14.12',
+        'ruamel.yaml==0.15.33',
 		'parse==1.8.2',
         'jinja2==2.8'
     ],

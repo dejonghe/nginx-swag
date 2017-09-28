@@ -28,7 +28,9 @@ def main():
 
     swag = Swagger(args.swag_file)
     template = Template(args.template)
-    logger.warn(template.render(swag.swag))
+
+    logger.warn(template.render({"swag":swag}))
+    #print(swag.yaml())
 
 
 if __name__ == '__main__':
