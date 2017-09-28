@@ -9,7 +9,7 @@ def branch = params.branch
 
 // For git
 def gitCreds = 'derek'
-def gitNgxSwag = 'git@github.com/dejonghe/ngx-swag.git'
+def gitNgxSwag = 'github.com/dejonghe/ngx-swag.git'
 
 node() {
     stage('prep') {
