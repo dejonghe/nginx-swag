@@ -15,7 +15,8 @@ node() {
     stage('prep') {
         dir('ngx-swag'){
             echo "Pulling ngx-swag code from branch \"${branch}\""
-            git url: gitNgxSwag, credentialsId: gitCreds, branch: "${branch}"
+            checkout scm
+            // git url: gitNgxSwag, credentialsId: gitCreds, branch: "${branch}"
         }
     }
     stage('build_dist') {
